@@ -14,6 +14,7 @@ import AdminItemPage from './pages/admin/AdminItemPage';
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="login" element={<LoginPage />} />
