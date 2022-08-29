@@ -35,7 +35,7 @@ const Wrapper = styled(Responsive)`
 `;
 
 const Spacer = styled.div`
-  height: 2vh;
+  height: 4rem;
 `;
 
 const StyledLink = styled(Link)`

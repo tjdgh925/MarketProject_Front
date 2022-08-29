@@ -7,7 +7,7 @@ const LoginBlock = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 98vh;
+  height: 95%;
   align-items: center;
 `;
 
