@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import RegisterButton from '../../components/register/RegisterButton';
-import RegisterForm from '../../components/register/RegisterForm';
+import AuthForm from '../../components/login/AuthForm';
+import { initialize, register } from '../../modules/auth';
+import { useNavigate } from 'react-router-dom';
+import ErrorMessage from '../../components/common/ErrorMessage';
 
 const RegisterBlock = styled.div`
   display: flex;
@@ -26,11 +30,52 @@ const RegisterBox = styled.div`
 `;
 
 const RegisterPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const registerState = useSelector((state) => state.auth);
+  const [registerInfo, setRegisterInfo] = useState({
+    memberName: '',
+    email: '',
+    address: '',
+    password: '',
+    passwordConfirm: '',
+  });
+
+  // 인풋 변경 이벤트 핸들러
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setRegisterInfo({
+      ...registerInfo,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(register(registerInfo));
+    },
+    [dispatch, registerInfo]
+  );
+
+  useEffect(() => {
+    dispatch(initialize());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (registerState.auth) navigate('/login');
+  }, [navigate, registerState.auth]);
+
   return (
     <RegisterBlock>
       <RegisterBox>
-        <RegisterForm />
-        <RegisterButton />
+        <AuthForm type="register" form={registerInfo} onChange={onChange} />
+        {registerState.error.error ? (
+          <ErrorMessage>{registerState.error.error}</ErrorMessage>
+        ) : (
+          <div />
+        )}
+        <RegisterButton onSubmit={onSubmit} />
       </RegisterBox>
     </RegisterBlock>
   );

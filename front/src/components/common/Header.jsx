@@ -85,11 +85,11 @@ const Header = ({ user, onLogout }) => {
             )}
           </MenuBlock>
           <div className="right">
-            <Button to="/login" color="green" fullWidth>
+            <Button to="/login" color="green">
               장바구니
             </Button>
             <SearchInput placeholder="상품명/키워드"></SearchInput>
-            <Button to="/cart" color="green" fullWidth>
+            <Button to="/cart" color="green">
               검색
             </Button>
           </div>
