@@ -32,6 +32,12 @@ const buttonStyle = css`
         background: var(--button-bg-color, ${props.color});
       }
     `}
+
+  ${(props) =>
+    props.width &&
+    css`
+      width: ${props.width};
+    `}
 `;
 
 const StyledButton = styled.button`
@@ -44,9 +50,17 @@ const StyledLink = styled(Link)`
 
 const Button = (props) => {
   return props.to ? (
-    <StyledLink {...props} color={props.color ? props.color : '#025ce2'} />
+    <StyledLink
+      {...props}
+      color={props.color ? props.color : '#025ce2'}
+      width={props.width ? props.width : '70px'}
+    />
   ) : (
-    <StyledButton {...props} color={props.color ? props.color : '#025ce2'} />
+    <StyledButton
+      {...props}
+      color={props.color ? props.color : '#025ce2'}
+      width={props.width ? props.width : '70px'}
+    />
   );
 };
 

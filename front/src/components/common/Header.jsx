@@ -14,7 +14,7 @@ const HeaderBlock = styled.div`
 const MenuBlock = styled.div``;
 
 const Wrapper = styled(Responsive)`
-  width: 90%;
+  width: 95%;
   height: 4rem;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@ const Wrapper = styled(Responsive)`
     letter-spacing: 2px;
   }
   .menu {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
   .right {
@@ -35,7 +35,7 @@ const Wrapper = styled(Responsive)`
 `;
 
 const Spacer = styled.div`
-  height: 4rem;
+  height: 2vh;
 `;
 
 const StyledLink = styled(Link)`
@@ -49,6 +49,9 @@ const SearchInput = styled.input`
   font-size: 1.2rem;
   padding-left: 10px;
   margin: 5px;
+  border: none;
+  border: solid 1px #ccc;
+  border-radius: 4px;
 `;
 
 const Header = ({ user, onLogout }) => {
@@ -85,7 +88,7 @@ const Header = ({ user, onLogout }) => {
             <Button to="/login" color="green" fullWidth>
               장바구니
             </Button>
-            <SearchInput></SearchInput>
+            <SearchInput placeholder="상품명/키워드"></SearchInput>
             <Button to="/cart" color="green" fullWidth>
               검색
             </Button>
