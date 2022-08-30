@@ -42,13 +42,16 @@ const RegisterPage = () => {
   });
 
   // 인풋 변경 이벤트 핸들러
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setRegisterInfo({
-      ...registerInfo,
-      [name]: value,
-    });
-  };
+  const onChange = useCallback(
+    (e) => {
+      const { value, name } = e.target;
+      setRegisterInfo({
+        ...registerInfo,
+        [name]: value,
+      });
+    },
+    [registerInfo]
+  );
 
   const onSubmit = useCallback(
     (e) => {
