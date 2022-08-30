@@ -7,11 +7,24 @@ export async function register({
   password,
   passwordConfirm,
 }) {
-  await market.post('/form/register', {
+  await market.post('/register', {
     memberName,
     email,
     address,
     password,
     passwordConfirm,
   });
+}
+
+export async function login({ email, password }) {
+  await market
+    .post('/login', {
+      email,
+      password,
+    })
+    .then((response) => {
+      const { accessToken, refreshToken } = response.data;
+      const user = { accessToken, refreshToken, email };
+      localStorage.setItem('user', JSON.stringify(user));
+    });
 }
