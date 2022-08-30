@@ -28,10 +28,29 @@ export const authSlice = createSlice({
       state.error.loading = false;
       state.error.error = action.payload;
     },
+    login: (state, action) => {
+      state.data = action.payload;
+      state.error.loading = true;
+    },
+    loginSuccess(state, action) {
+      state.error.loading = false;
+      state.auth = action.payload;
+    },
+    loginFailure(state, action) {
+      state.error.loading = false;
+      state.error.error = action.payload;
+    },
   },
 });
 
-export const { initialize, register, registerSuccess, registerFailure } =
-  authSlice.actions;
+export const {
+  initialize,
+  register,
+  registerSuccess,
+  registerFailure,
+  login,
+  loginSuccess,
+  loginFailure,
+} = authSlice.actions;
 
 export default authSlice.reducer;
