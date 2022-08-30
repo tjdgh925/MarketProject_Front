@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
 
@@ -27,6 +27,9 @@ const Wrapper = styled(Responsive)`
   .menu {
     font-size: 1.2rem;
     font-weight: 600;
+    &:hover {
+      opacity: 0.6;
+    }
   }
   .right {
     display: flex;
@@ -44,6 +47,14 @@ const StyledLink = styled(Link)`
   color: black;
 `;
 
+const StyledButton = styled.button`
+  text-decoration-line: none;
+  padding-right: 20px;
+  color: black;
+  background: none;
+  border: none;
+`;
+
 const SearchInput = styled.input`
   line-height: 2;
   font-size: 1.2rem;
@@ -54,7 +65,20 @@ const SearchInput = styled.input`
   border-radius: 4px;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = () => {
+  const navigate = useNavigate();
+  const user = localStorage.getItem('user');
+  const { email } = JSON.parse(user);
+
+  const logout = useCallback(
+    (e) => {
+      e.preventDefault();
+      localStorage.clear();
+      navigate('/');
+    },
+    [navigate]
+  );
+
   return (
     <>
       <HeaderBlock>
@@ -65,18 +89,18 @@ const Header = ({ user, onLogout }) => {
             </StyledLink>
             {user ? (
               <>
-                <StyledLink to="/" className="menu">
+                <StyledLink to="/admin/item" className="menu">
                   상품 등록
                 </StyledLink>
-                <StyledLink to="/" className="menu">
+                <StyledLink to="/admim/itemhist" className="menu">
                   상품 관리
                 </StyledLink>
-                <StyledLink to="/" className="menu">
-                  프로필
+                <StyledLink to="/profile" className="menu">
+                  {email}
                 </StyledLink>
-                <StyledLink to="/" className="menu">
+                <StyledButton onClick={logout} className="menu">
                   로그아웃
-                </StyledLink>
+                </StyledButton>
               </>
             ) : (
               <StyledLink to="/login" className="menu">
@@ -85,11 +109,11 @@ const Header = ({ user, onLogout }) => {
             )}
           </MenuBlock>
           <div className="right">
-            <Button to="/login" color="green">
+            <Button to="/cart" color="green">
               장바구니
             </Button>
             <SearchInput placeholder="상품명/키워드"></SearchInput>
-            <Button to="/cart" color="green">
+            <Button to="/search" color="green">
               검색
             </Button>
           </div>
