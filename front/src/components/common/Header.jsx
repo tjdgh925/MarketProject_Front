@@ -67,8 +67,7 @@ const SearchInput = styled.input`
 
 const Header = () => {
   const navigate = useNavigate();
-  const user = localStorage.getItem('user');
-  const { email } = JSON.parse(user);
+  const email = localStorage.getItem('email');
 
   const logout = useCallback(
     (e) => {
@@ -87,7 +86,7 @@ const Header = () => {
             <StyledLink to="/" className="logo">
               Market
             </StyledLink>
-            {user ? (
+            {email ? (
               <>
                 <StyledLink to="/admin/item" className="menu">
                   상품 등록

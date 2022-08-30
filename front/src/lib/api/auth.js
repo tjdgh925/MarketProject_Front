@@ -23,8 +23,7 @@ export async function login({ email, password }) {
       password,
     })
     .then((response) => {
-      const { accessToken, refreshToken } = response.data;
-      const user = { accessToken, refreshToken, email };
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('email', email);
     });
 }
