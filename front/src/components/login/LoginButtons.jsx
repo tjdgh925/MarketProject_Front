@@ -38,11 +38,11 @@ const Image = styled.img`
   object-fit: fill;
 `;
 
-const LoginButtons = () => {
+const LoginButtons = ({ onSubmit }) => {
   return (
     <LoginButtonBlocks>
       <ButtonRow>
-        <Button width="42%" to="/login">
+        <Button width="42%" onClick={onSubmit}>
           로그인
         </Button>
         <Button width="42%" to="/register">
