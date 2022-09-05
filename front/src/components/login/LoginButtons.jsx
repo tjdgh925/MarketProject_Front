@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../common/Button';
 import styled from 'styled-components';
 import KakaoImg from '../../img/kakao.png';
 import GoogleImg from '../../img/google.png';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const LoginButtonBlocks = styled.div`
   display: flex;
@@ -50,12 +51,12 @@ const LoginButtons = ({ onSubmit }) => {
         </Button>
       </ButtonRow>
       <ButtonRow>
-        <ImageButton to="/kakao">
+        <a href="http://localhost:8080/oauth2/authorization/kakao">
           <Image src={KakaoImg} />
-        </ImageButton>
-        <ImageButton to="/kakao">
+        </a>
+        <a href="http://localhost:8080/oauth2/authorization/google">
           <Image src={GoogleImg} />
-        </ImageButton>
+        </a>
       </ButtonRow>
     </LoginButtonBlocks>
   );

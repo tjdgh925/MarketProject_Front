@@ -17,6 +17,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
 import { Provider } from 'react-redux';
+import OAuthLoginRedirect from './components/login/OAuthLoginRedirect';
 
 const FullBlock = styled.div`
   height: 100vh;
@@ -45,6 +46,11 @@ function App() {
             <Route path="adminitem" element={<AdminItemPage />} />
             <Route path="item" element={<ItemPage />} />
             <Route path="profile" element={<ProfilePage />} />
+
+            <Route
+              path="/oauth2/redirect/:token"
+              element={<OAuthLoginRedirect />}
+            />
           </Routes>
         </BrowserRouter>
       </Provider>
