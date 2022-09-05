@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import LoginButtons from '../../components/login/LoginButtons';
 import AuthForm from '../../components/login/AuthForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { initialize, initializeForm, login } from '../../modules/auth';
+import { initialize, login } from '../../modules/auth';
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from '../../components/common/ErrorMessage';
 
