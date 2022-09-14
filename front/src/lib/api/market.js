@@ -9,12 +9,12 @@ const BEARER = 'Bearer ';
 market.interceptors.request.use(function (config) {
   const user = localStorage.getItem('user');
   if (!user) {
-    config.headers['accessToken'] = null;
+    config.headers['Authorization'] = null;
     config.headers['refreshToken'] = null;
     return config;
   }
   const { accessToken, refreshToken } = JSON.parse(user);
-  config.headers['accessToken'] = BEARER + accessToken;
+  config.headers['Authorization'] = BEARER + accessToken;
   config.headers['refreshToken'] = BEARER + refreshToken;
   return config;
 });
@@ -35,7 +35,7 @@ market.interceptors.response.use(
             'user',
             JSON.stringify(data.data, ['accessToken', 'refreshToken'])
           );
-          originalRequest.headers['accessToken'] = BEARER + accessToken;
+          originalRequest.headers['Authorization'] = BEARER + accessToken;
           originalRequest.headers['refreshToken'] = BEARER + refreshToken;
           return await market.request(originalRequest);
         }

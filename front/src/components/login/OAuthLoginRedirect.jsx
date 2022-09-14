@@ -7,8 +7,12 @@ function OAuthLoginRedirect() {
   useEffect(() => {
     localStorage.clear();
     var tokens = params.token.split('+');
-    localStorage.setItem('accessToken', tokens[0]);
-    localStorage.setItem('refreshToken', tokens[1]);
+    var tokenObject = {
+      accessToken: tokens[0],
+      refreshToken: tokens[1],
+    };
+
+    localStorage.setItem('user', JSON.stringify(tokenObject));
 
     window.location.replace('/');
   }, []);

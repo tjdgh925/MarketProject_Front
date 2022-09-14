@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
+import { getEmail } from '../../lib/api/auth';
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -67,7 +68,18 @@ const SearchInput = styled.input`
 
 const Header = () => {
   const navigate = useNavigate();
-  const email = localStorage.getItem('email');
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      return;
+    }
+    const promise = getEmail();
+    promise.then((response) => {
+      console.log(response.data);
+      setEmail(response.data);
+    });
+  }, []);
 
   const logout = useCallback(
     (e) => {

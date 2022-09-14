@@ -24,6 +24,9 @@ export async function login({ email, password }) {
     })
     .then((response) => {
       localStorage.setItem('user', JSON.stringify(response.data));
-      localStorage.setItem('email', email);
     });
+}
+
+export async function getEmail() {
+  return await market.get('/email');
 }
