@@ -27,20 +27,23 @@ market.interceptors.response.use(
     if (error.response && error.response.status === 403) {
       try {
         const originalRequest = error.config;
-        const data = await market.get('auth/refreshtoken');
+        const data = await market.get('/renew');
         if (data) {
-          const { accessToken, refreshToken } = data.data;
+          console.log(data);
           localStorage.removeItem('user');
-          localStorage.setItem(
-            'user',
-            JSON.stringify(data.data, ['accessToken', 'refreshToken'])
-          );
+          localStorage.setItem('user', JSON.stringify(data.data));
+
+          const user = localStorage.getItem('user');
+          const { accessToken, refreshToken } = JSON.parse(user);
           originalRequest.headers['Authorization'] = BEARER + accessToken;
           originalRequest.headers['refreshToken'] = BEARER + refreshToken;
+
+          // originalRequest.headers['Authorization'] = BEARER + accessToken;
+          // originalRequest.headers['refreshToken'] = BEARER + refreshToken;
           return await market.request(originalRequest);
         }
       } catch (error) {
-        localStorage.removeItem('user');
+        // localStorage.removeItem('user');
         console.log(error);
       }
       return Promise.reject(error);

@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '../common/Button';
 import styled from 'styled-components';
 import KakaoImg from '../../img/kakao.png';
 import GoogleImg from '../../img/google.png';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 
 const LoginButtonBlocks = styled.div`
   display: flex;
@@ -20,17 +18,6 @@ const ButtonRow = styled.div`
   justify-content: space-between;
   width: 90%;
   margin-bottom: 8px;
-`;
-
-const ImageButton = styled(Link)`
-  padding: none;
-  width: 48%;
-
-  border: none;
-  background: none;
-  & :hover {
-    -webkit-filter: brightness(90%);
-  }
 `;
 
 const Image = styled.img`
